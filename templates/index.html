@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Остановим глобальное потепление!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .chat-box {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background-color: #dcf8c6;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .message.bot {
+            background-color: #9b9595;
+            align-self: flex-start;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-box" class="chat-box"></div>
+
+    <script>
+        async function fetchMessages() {
+            try {
+                const response = await fetch('/messages');
+                const data = await response.json();
+
+                const chatBox = document.getElementById('chat-box');
+                chatBox.innerHTML = '';
+
+                data.forEach(msg => {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.classList.add('message', msg.author);
+                    msgDiv.textContent = msg.text;
+                    chatBox.appendChild(msgDiv);
+                });
+
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                console.error('Ошибка при получении сообщений:', error);
+            }
+        }
+
+        // Загружаем сообщения при старте
+        fetchMessages();
+
+        // Обновляем каждые 2 секунды
+        setInterval(fetchMessages, 2000);
+    </script>
+</body>
+</html>
