@@ -12,7 +12,7 @@ if platform.system() == "Windows":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 app1 = Flask(__name__)
-bot = telebot.TeleBot('7614311120:AAF7XucXR95-a4MY3SyMbdbM2rKnwB9iOHw')
+bot = telebot.TeleBot(YOUR_BOT_TOKEN)
 
 chat_contexts = {}
 messages = []
