@@ -114,7 +114,7 @@ def handle_message(message):
     messages.append({"author": "bot", "text": assistant_message})
 
 def run_flask():
-    app1.run(debug=True, port=5000, use_reloader=False)
+    app1.run(debug=True, use_reloader=False)
 
 def run_bot():
     bot.infinity_polling()
